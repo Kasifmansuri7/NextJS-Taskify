@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { currentUser, User } from '@clerk/nextjs/server';
 import { Medal } from 'lucide-react';
 import { Poppins } from 'next/font/google';
 import localFont from 'next/font/local';
