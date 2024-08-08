@@ -1,7 +1,7 @@
 import { OrganizationSwitcher } from '@clerk/nextjs';
 import { auth } from '@clerk/nextjs/server';
 
-export default function OrganizationDetailPage({
+export default function OrganizationIdPage({
   params,
 }: {
   params: {
@@ -9,9 +9,5 @@ export default function OrganizationDetailPage({
   };
 }) {
   const { userId, orgId } = auth();
-  return (
-    <div>
-      <OrganizationSwitcher hidePersonal />
-    </div>
-  );
+  return <div>Organization details: {orgId}</div>;
 }

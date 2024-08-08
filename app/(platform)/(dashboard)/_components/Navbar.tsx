@@ -13,7 +13,7 @@ export const Navbar = () => {
         </div>
         <Button
           size="sm"
-          variant="secondary"
+          variant="primary"
           className="rounded-sm h-auto py-1.5 px-2"
         >
           <span className="hidden md:block">Create</span>
