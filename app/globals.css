@@ -73,3 +73,8 @@ body,
     @apply bg-background text-foreground;
   }
 }
+
+/* box shadow of organization profile */
+.cl-internal-1k1s4ua {
+  box-shadow: none;
+}
