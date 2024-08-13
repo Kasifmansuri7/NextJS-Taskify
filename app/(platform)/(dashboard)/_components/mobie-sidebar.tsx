@@ -11,7 +11,6 @@ import { Sidebar } from './Sidebar';
 
 export const MobileSidebar = () => {
   const pathname = usePathname();
-  console.log('pathname: ', pathname);
   const { onOpen, onClose, isOpen } = useMobileSidebar();
 
   useEffect(() => {
