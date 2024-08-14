@@ -11,7 +11,7 @@ export const FormInput = ({ errors }: FormInputProps) => {
   const { pending } = useFormStatus();
 
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-col">
       <Input
         id="title"
         name="title"
@@ -22,7 +22,7 @@ export const FormInput = ({ errors }: FormInputProps) => {
       {errors?.title ? (
         <div>
           {errors.title.map((er: string) => (
-            <p className="text-rose-500" key={er}>
+            <p className="text-rose-500 text-sm" key={er}>
               {er}
             </p>
           ))}
