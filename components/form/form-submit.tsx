@@ -2,11 +2,10 @@
 
 import { useFormStatus } from 'react-dom';
 import { Button } from '../ui/button';
+import { cn } from '@/lib/utils';
 
 interface FormSubmitProps {
   children: React.ReactNode;
-  disabled?: boolean;
-  className?: string;
   variant:
     | 'default'
     | 'destructive'
@@ -15,6 +14,8 @@ interface FormSubmitProps {
     | 'ghost'
     | 'link'
     | 'primary';
+  disabled?: boolean;
+  className?: string;
   size?: 'default' | 'sm' | 'lg' | 'icon';
 }
 export const FormSubmit = ({
@@ -32,6 +33,7 @@ export const FormSubmit = ({
       disabled={pending || disabled}
       variant={variant}
       size={size || 'sm'}
+      className={className}
     >
       {children}
     </Button>
