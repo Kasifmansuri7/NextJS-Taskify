@@ -10,8 +10,8 @@ import { useParams } from 'next/navigation';
 import { FormSubmit } from '@/components/form/form-submit';
 import { Button } from '@/components/ui/button';
 import { useAction } from '@/hooks/use-action';
-import { createList } from '@/actions/create-list';
-import { CreateList } from '@/actions/create-list/schema';
+import { createList } from '@/actions/list/create-list';
+import { CreateList } from '@/actions/list/create-list/schema';
 import { toast } from 'sonner';
 import { useFormStatus } from 'react-dom';
 import { useRouter } from 'next/navigation';
@@ -27,7 +27,7 @@ export const ListForm = () => {
 
   const { execute, isLoading, fieldErrors } = useAction(createList, {
     onSuccess: (data) => {
-      toast.success(`List ${data.title} created.`);
+      toast.success(`List "${data.title}" created.`);
       disableEditing();
       router.refresh();
     },

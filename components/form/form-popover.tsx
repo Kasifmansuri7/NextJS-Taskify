@@ -11,7 +11,7 @@ import { X } from 'lucide-react';
 import { FormInput } from './form-input';
 import { FormSubmit } from './form-submit';
 import { useAction } from '@/hooks/use-action';
-import { createBoard } from '@/actions/create-board';
+import { createBoard } from '@/actions/board/create-board';
 import { toast } from 'sonner';
 import { FormPicker } from './form-picker';
 import { ElementRef, useRef } from 'react';

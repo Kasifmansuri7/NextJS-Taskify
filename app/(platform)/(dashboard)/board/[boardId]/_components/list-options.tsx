@@ -12,10 +12,10 @@ import { MoreHorizontal, X } from 'lucide-react';
 import { FormSubmit } from '@/components/form/form-submit';
 import { Separator } from '@/components/ui/separator';
 import { useAction } from '@/hooks/use-action';
-import { deleteList } from '@/actions/delete-list';
+import { deleteList } from '@/actions/list/delete-list';
 import { toast } from 'sonner';
 import { ElementRef, useRef } from 'react';
-import { copyList } from '@/actions/copy-list';
+import { copyList } from '@/actions/list/copy-list';
 
 interface ListOptionsProps {
   data: List;
@@ -26,7 +26,7 @@ export const ListOptions = ({ onAddCard, data }: ListOptionsProps) => {
   const closeRef = useRef<ElementRef<'button'>>(null);
   const { execute: executeDelete } = useAction(deleteList, {
     onSuccess: (data) => {
-      toast.success(`${data.title} list deleted successfully.`);
+      toast.success(`"${data.title}" list deleted successfully.`);
     },
     onError: (error) => {
       toast.error(error);
@@ -35,7 +35,7 @@ export const ListOptions = ({ onAddCard, data }: ListOptionsProps) => {
 
   const { execute: executeCopy } = useAction(copyList, {
     onSuccess: (data) => {
-      toast.success(`${data.title} is copied`);
+      toast.success(`"${data.title}" is copied`);
     },
     onError: (error) => {
       toast.error(error);

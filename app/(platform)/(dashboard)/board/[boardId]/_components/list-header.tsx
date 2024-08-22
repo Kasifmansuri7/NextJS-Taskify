@@ -1,6 +1,6 @@
 'use client';
 
-import { updateList } from '@/actions/update-list';
+import { updateList } from '@/actions/list/update-list';
 import { FormInput } from '@/components/form/form-input';
 import { useAction } from '@/hooks/use-action';
 import { List } from '@prisma/client';
@@ -11,9 +11,10 @@ import { ListOptions } from './list-options';
 
 interface ListHeaderProps {
   data: List;
+  onAddCard: () => void;
 }
 
-export const ListHeader = ({ data }: ListHeaderProps) => {
+export const ListHeader = ({ data, onAddCard }: ListHeaderProps) => {
   const [title, setTitle] = useState(data.title);
   const [isEditing, setIsEditing] = useState(false);
   const inputRef = useRef<ElementRef<'input'>>(null);
@@ -21,7 +22,7 @@ export const ListHeader = ({ data }: ListHeaderProps) => {
   const { execute, isLoading } = useAction(updateList, {
     onSuccess: (data) => {
       setTitle(data.title);
-      toast.success(`Renamed to ${data.title} successfully.`);
+      toast.success(`Renamed to "${data.title}" successfully.`);
       disableEditing();
     },
     onError: (error) => {
@@ -85,7 +86,7 @@ export const ListHeader = ({ data }: ListHeaderProps) => {
         </div>
       )}
 
-      <ListOptions onAddCard={() => {}} data={data} />
+      <ListOptions onAddCard={onAddCard} data={data} />
     </div>
   );
 };
