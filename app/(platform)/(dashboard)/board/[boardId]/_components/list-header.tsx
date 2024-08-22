@@ -4,17 +4,16 @@ import { updateList } from '@/actions/update-list';
 import { FormInput } from '@/components/form/form-input';
 import { useAction } from '@/hooks/use-action';
 import { List } from '@prisma/client';
-import { useRouter } from 'next/navigation';
 import { useRef, useState, ElementRef } from 'react';
 import { toast } from 'sonner';
 import { useEventListener, useOnClickOutside } from 'usehooks-ts';
+import { ListOptions } from './list-options';
 
 interface ListHeaderProps {
   data: List;
 }
 
 export const ListHeader = ({ data }: ListHeaderProps) => {
-  const router = useRouter();
   const [title, setTitle] = useState(data.title);
   const [isEditing, setIsEditing] = useState(false);
   const inputRef = useRef<ElementRef<'input'>>(null);
@@ -62,31 +61,10 @@ export const ListHeader = ({ data }: ListHeaderProps) => {
   };
 
   useEventListener('keydown', onKeyDown);
-  useOnClickOutside(formRef, disableEditing);
-
-  // if (isEditing) {
-  //   return (
-  //     <div className="pt-2 px-2 text-sm font-semibold flex justify-between items-center gap-x-2">
-  //       <div className="w-full text-sm px-2.5 h-7 font-medium">
-  //         <form action={onSubmit} ref={formRef}>
-  //           <FormInput
-  //             id="title"
-  //             defaultValue={title}
-  //             className="bg-transparent border-none outline-none px-0 py-0"
-  //             onBlur={onBlur}
-  //             ref={inputRef}
-  //           />
-  //         </form>
-  //       </div>
-  //     </div>
-  //   );
-  // }
+  useOnClickOutside(formRef, onBlur);
 
   return (
-    <div
-      className="pt-2 px-2 text-sm font-semibold flex justify-between items-start gap-x-2 w-full"
-      onClick={enableEditing}
-    >
+    <div className="pt-2 px-2 text-sm font-semibold flex justify-between items-center gap-x-2 w-full">
       {isEditing ? (
         <form className="w-[252px]" action={onSubmit} ref={formRef}>
           <FormInput
@@ -99,10 +77,15 @@ export const ListHeader = ({ data }: ListHeaderProps) => {
           />
         </form>
       ) : (
-        <div className="w-full text-sm px-2.5 py-1 h-7 font-medium">
+        <div
+          className="w-full text-sm px-2.5 py-1 h-7 font-medium"
+          onClick={enableEditing}
+        >
           {title}
         </div>
       )}
+
+      <ListOptions onAddCard={() => {}} data={data} />
     </div>
   );
 };
