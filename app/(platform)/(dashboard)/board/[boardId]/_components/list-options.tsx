@@ -15,6 +15,7 @@ import { useAction } from '@/hooks/use-action';
 import { deleteList } from '@/actions/delete-list';
 import { toast } from 'sonner';
 import { ElementRef, useRef } from 'react';
+import { copyList } from '@/actions/copy-list';
 
 interface ListOptionsProps {
   data: List;
@@ -32,9 +33,22 @@ export const ListOptions = ({ onAddCard, data }: ListOptionsProps) => {
     },
   });
 
+  const { execute: executeCopy } = useAction(copyList, {
+    onSuccess: (data) => {
+      toast.success(`${data.title} is copied`);
+    },
+    onError: (error) => {
+      toast.error(error);
+    },
+  });
+
   const onDeleteList = () => {
     executeDelete({ id: data.id, boardId: data.boardId });
     closeRef.current?.click();
+  };
+
+  const onCopyList = () => {
+    executeCopy({ id: data.id, boardId: data.boardId });
   };
 
   return (
@@ -65,14 +79,13 @@ export const ListOptions = ({ onAddCard, data }: ListOptionsProps) => {
         >
           Add card...
         </Button>
-        <form>
-          <FormSubmit
-            variant="ghost"
-            className="rounded-none w-full h-auto p-2 px-5 justify-start font-normal text-sm"
-          >
-            Copy list...
-          </FormSubmit>
-        </form>
+        <Button
+          variant="ghost"
+          className="rounded-none w-full h-auto p-2 px-5 justify-start font-normal text-sm"
+          onClick={onCopyList}
+        >
+          Copy list...
+        </Button>
         <Separator />
         <Button
           variant="ghost"
