@@ -24,12 +24,13 @@ export const FormPicker = ({ id, errors }: FormPickerProps) => {
     const fetchImages = async () => {
       try {
         const result = await unsplash.photos.getRandom({
-          collectionIds: ['31709'],
+          collectionIds: ['31709', '13744', '10104'],
           count: 9,
         });
         if (result && result.response) {
           const resImages = result.response as Array<Record<string, any>>;
           setImages(resImages);
+          return;
         }
         setImages(unsplashDefaultImages);
       } catch (error) {
@@ -74,6 +75,7 @@ export const FormPicker = ({ id, errors }: FormPickerProps) => {
               name={id}
               className="hidden"
               checked={selectedImageId === image.id}
+              onChange={() => {}}
               disabled={pending}
               value={`${image.id}|${image.urls.thumb}|${image.urls.full}|${image.user.links.html}|${image.user.name}`}
             />

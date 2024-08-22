@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 
 interface FormSubmitProps {
   children: React.ReactNode;
-  variant:
+  variant?:
     | 'default'
     | 'destructive'
     | 'outline'
@@ -22,7 +22,7 @@ export const FormSubmit = ({
   children,
   disabled,
   className,
-  variant,
+  variant = 'default',
   size,
 }: FormSubmitProps) => {
   const { pending } = useFormStatus();
