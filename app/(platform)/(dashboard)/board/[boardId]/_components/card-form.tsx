@@ -6,7 +6,7 @@ import { FormTextarea } from '@/components/form/form-text-area';
 import { Button } from '@/components/ui/button';
 import { useAction } from '@/hooks/use-action';
 import { Plus, X } from 'lucide-react';
-import { ElementRef, forwardRef, useRef } from 'react';
+import { ElementRef, forwardRef, KeyboardEventHandler, useRef } from 'react';
 import { toast } from 'sonner';
 import { useEventListener, useOnClickOutside } from 'usehooks-ts';
 
@@ -49,6 +49,15 @@ export const CardForm = forwardRef<HTMLTextAreaElement, CardFormProps>(
     useEventListener('keydown', onKeyDown);
     useOnClickOutside(formRef, disableEditing);
 
+    const onTextAreaKeyDown: KeyboardEventHandler<HTMLTextAreaElement> = (
+      e
+    ) => {
+      if (e.key == 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        formRef.current?.requestSubmit();
+      }
+    };
+
     if (isEditing) {
       return (
         <form
@@ -58,7 +67,7 @@ export const CardForm = forwardRef<HTMLTextAreaElement, CardFormProps>(
         >
           <FormTextarea
             id="title"
-            onKeyDown={() => {}}
+            onKeyDown={onTextAreaKeyDown}
             ref={ref}
             placeholder="Enter a title for this card..."
             errors={fieldErrors}
