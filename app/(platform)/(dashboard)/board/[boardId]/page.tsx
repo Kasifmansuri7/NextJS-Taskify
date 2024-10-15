@@ -22,6 +22,9 @@ export default async function BoardIdPage({ params }: BoardIdPageProps) {
         orgId,
       },
     },
+    orderBy: {
+      order: 'asc',
+    },
     include: {
       cards: {
         orderBy: {
