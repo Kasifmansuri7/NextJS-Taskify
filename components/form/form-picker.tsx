@@ -34,7 +34,7 @@ export const FormPicker = ({ id, errors }: FormPickerProps) => {
         }
         setImages(unsplashDefaultImages);
       } catch (error) {
-        console.log('Unsplash fetch error!!', error);
+        console.error('Unsplash fetch error!!', error);
         // setting the default images in case we have exceeded the api calls
         setImages(unsplashDefaultImages);
       } finally {

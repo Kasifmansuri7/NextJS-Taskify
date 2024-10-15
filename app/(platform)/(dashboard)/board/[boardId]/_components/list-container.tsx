@@ -150,7 +150,6 @@ export const ListContainer = ({ boardId, data }: ListContainerProps) => {
           })
         );
 
-        console.log('sourceList.cards: ', sourceList.cards);
         executeUpdateCardReorder({
           items: destinationList.cards,
         });

@@ -17,7 +17,6 @@ const handler = async (data: InputType): Promise<ReturnType> => {
   }
 
   const { items } = data;
-  console.log('items: ', items);
 
   let cards;
   try {
